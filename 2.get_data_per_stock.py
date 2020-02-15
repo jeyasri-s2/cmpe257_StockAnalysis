@@ -66,21 +66,21 @@ for r_s_s in reformated_stock_symbols:
 
 print ("------ Get Date,Open,High,Low,Close,Volume,OpenInt data for each stock, save in file ------")
 
-one_string = ""
+# one_string = ""
 
-for stock_symbol in final_stock_symbols:
-    one_string = one_string + " " + stock_symbol
+# for stock_symbol in final_stock_symbols:
+#     one_string = one_string + " " + stock_symbol
 
-for stock_symbol in final_stock_symbols:
-    try:
-        ticker = yf.Ticker(str(stock_symbol))
-        sector = ticker.info['sector'] 
-        history = ticker.history(start="2010-01-01", end="2020-01-01")
-        history.to_csv("dataset_with_sector/" + stock_symbol + "_" + sector.replace(" ", "-") + ".csv")
-    except:
-        e = sys.exc_info()[0]
-        print (stock_symbol)
-        print (e)
+# for stock_symbol in final_stock_symbols:
+#     try:
+#         ticker = yf.Ticker(str(stock_symbol))
+#         sector = ticker.info['sector'] 
+#         history = ticker.history(start="2010-01-01", end="2020-01-01")
+#         history.to_csv("dataset_with_sector/" + stock_symbol + "_" + sector.replace(" ", "-") + ".csv")
+#     except:
+#         e = sys.exc_info()[0]
+#         print (stock_symbol)
+#         print (e)
         
 
 print ("------ Final Model Script  ------")

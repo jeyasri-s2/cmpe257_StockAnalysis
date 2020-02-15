@@ -8,7 +8,7 @@ from sklearn.preprocessing import MinMaxScaler
 class stock_summary_data():
     
     def __init__(self):
-        self.stocks_files = glob.glob("/Users/wasaequreshi/Desktop/Cmpe257_StockAnalysis/Datasets/*.csv")
+        self.stocks_files = glob.glob("/Users/wasaequreshi/Desktop/Cmpe257_StockAnalysis/dataset_with_sector/*.csv")
 
         self.stocks_files.sort()
 
@@ -57,17 +57,20 @@ class stock_summary_data():
         number_of_stocks = 0
         stocks_passed = 0
         stocks_failed = 0
-
+        print ("----- Calculating ------")
         # Stock name, annual return (summed), variance
         for file_path in self.stocks_files:
             try:
-                stock_name = file_path.split("/")[-1].split(".")[0].split("_")[0]
-                sector = stock_name = file_path.split("/")[-1].split(".")[0].split("_")[1]
+                split_stock_name_sector = file_path.split("/")[-1].split(".")[0].split("_")
+                stock_name = split_stock_name_sector[0]
+                sector = split_stock_name_sector[1]
                 avg_yearly_return, variance_sum = self.calculate_sum_annual_return(file_path)
                 final_data.append([sector, stock_name, avg_yearly_return, variance_sum]) 
                 stocks_passed = stocks_passed + 1
             except:
+                
                 e = sys.exc_info()[0]
+                print ("Error")
                 print (stock_name)
                 print (e)
                 stocks_failed = stocks_failed + 1
@@ -78,7 +81,7 @@ class stock_summary_data():
 
         file_write_csv = open("stock_summary_data_" + dt_string + ".csv", 'x')
         file_write_csv.write("sector,stock_name,avg_yearly_return,variance_sum\n")
-        
+        print ("----- Writing ------")
         for stock_data in final_data:
             try:
                 file_write_csv.write(str(stock_data[0]) + "," + str(stock_data[1]) + "," + str(stock_data[2]) + "," + str(stock_data[3]) + "\n")
