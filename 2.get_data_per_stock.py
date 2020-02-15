@@ -70,21 +70,17 @@ one_string = ""
 for stock_symbol in final_stock_symbols:
     one_string = one_string + " " + stock_symbol
 
-
-ticker = yf.download(str(one_string), start="2012-01-01", end="2020-01-01")
-
-# for stock_symbol in final_stock_symbols:
-#     try:
-#         ticker = yf.Ticker(str(stock_symbol))
-#         sector = ticker.info['sector'] 
-#         history = ticker.history("10y")
-       
-#         sys.exit()
-#     except:
-#         e = sys.exc_info()[0]
-#         print (stock_symbol)
-#         print (e)
-#         sys.exit()
+for stock_symbol in final_stock_symbols:
+    try:
+        ticker = yf.Ticker(str(stock_symbol))
+        sector = ticker.info['sector'] 
+        history = ticker.history(start="2010-01-01", end="2020-01-01")
+        history.to_csv("Datasets/" + stock_symbol + ".csv")
+    except:
+        e = sys.exc_info()[0]
+        print (stock_symbol)
+        print (e)
+        
 
 print ("------ Final Model Script  ------")
 
