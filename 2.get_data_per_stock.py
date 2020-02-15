@@ -2,6 +2,7 @@ import csv
 import re
 import yfinance as yf
 import sys
+from  stock_summary_data import stock_summary_data
 
 print ("------ Reformat Stock Ticker ------")
 stock_symbols = csv.reader(open("scrape_nyse_14_02_2020_22_26_02.csv", 'r'))
@@ -75,7 +76,7 @@ for stock_symbol in final_stock_symbols:
         ticker = yf.Ticker(str(stock_symbol))
         sector = ticker.info['sector'] 
         history = ticker.history(start="2010-01-01", end="2020-01-01")
-        history.to_csv("Datasets/" + stock_symbol + ".csv")
+        history.to_csv("dataset_with_sector/" + stock_symbol + "_" + sector.replace(" ", "-") + ".csv")
     except:
         e = sys.exc_info()[0]
         print (stock_symbol)
@@ -83,6 +84,5 @@ for stock_symbol in final_stock_symbols:
         
 
 print ("------ Final Model Script  ------")
-
-print ("------ Add Ticker ------")
-
+ssd = stock_summary_data()
+ssd.run()
