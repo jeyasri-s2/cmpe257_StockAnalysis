@@ -85,7 +85,6 @@ class get_data_per_stock():
         for stock_symbol in self.final_stock_symbols:
             
             if self.check_if_stock_file_exists(stock_symbol):
-                print ("Skipping")
                 continue
             
             try:

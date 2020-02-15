@@ -15,7 +15,7 @@ class scrape_nyse():
     def scrape_site(self):
         self.stock_symbols = []
         try:
-            for i in range(1):
+            for i in range(646):
                 print (self.stock_symbols)
                 time.sleep(5)
                 trs = self.driver.find_elements(By.XPATH, '//tr')

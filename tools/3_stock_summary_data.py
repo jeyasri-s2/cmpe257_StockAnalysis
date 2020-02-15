@@ -51,8 +51,9 @@ class stock_summary_data():
         
         return avg_yearly_return, variance_sum
     
-    def run(self):
-        final_data = []
+    def put_data_together(self):
+        
+        self.final_data = []
         
         number_of_stocks = 0
         stocks_passed = 0
@@ -64,8 +65,12 @@ class stock_summary_data():
                 split_stock_name_sector = file_path.split("/")[-1].split(".")[0].split("_")
                 stock_name = split_stock_name_sector[0]
                 sector = split_stock_name_sector[1]
+                
+                if sector == "Financial":
+                    sector = "Financial-Services"
+                
                 avg_yearly_return, variance_sum = self.calculate_sum_annual_return(file_path)
-                final_data.append([sector, stock_name, avg_yearly_return, variance_sum]) 
+                self.final_data.append([sector, stock_name, avg_yearly_return, variance_sum]) 
                 stocks_passed = stocks_passed + 1
             except:
                 
@@ -75,19 +80,27 @@ class stock_summary_data():
                 print (e)
                 stocks_failed = stocks_failed + 1
             number_of_stocks = number_of_stocks + 1
+
+    def write_data(self):
         
         now = datetime.datetime.now()
         dt_string = now.strftime("%d_%m_%Y_%H_%M_%S")
 
-        file_write_csv = open("../data/summarized_data/stock_summary_data_" + dt_string + ".csv", 'x')
+        file_write_csv = open("../data/summarized_data/stock_summary_data_" + dt_string + ".csv", 'w')
         file_write_csv.write("sector,stock_name,avg_yearly_return,variance_sum\n")
-        print ("----- Writing ------")
-        for stock_data in final_data:
+        
+        for stock_data in self.final_data:
             try:
                 file_write_csv.write(str(stock_data[0]) + "," + str(stock_data[1]) + "," + str(stock_data[2]) + "," + str(stock_data[3]) + "\n")
             except:
                 print (stock_data)
         file_write_csv.close()
+
+    def run(self):
+        print ("----- Putting Data Together -----")
+        self.put_data_together()
+        print ("----- Writing Data -----")
+        self.write_data()
 
 if __name__ == "__main__":
 
