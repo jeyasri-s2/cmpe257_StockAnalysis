@@ -42,8 +42,11 @@ class scrape_nyse():
         self.driver.close()
     
     def run(self):
+        print ("----- Scraping Site -----")
         self.scrape_site()
+        print ("----- Writing Scraped Site Data -----")
         self.write_scraped_data()
+        print ("----- Stopping -----")
         self.stop()
 
 if __name__ == "__main__":

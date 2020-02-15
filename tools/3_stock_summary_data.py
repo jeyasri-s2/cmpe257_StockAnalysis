@@ -8,7 +8,7 @@ from sklearn.preprocessing import MinMaxScaler
 class stock_summary_data():
     
     def __init__(self):
-        self.stocks_files = glob.glob("/Users/wasaequreshi/Desktop/Cmpe257_StockAnalysis/dataset_with_sector/*.csv")
+        self.stocks_files = glob.glob("../data/dataset_with_sector/*.csv")
 
         self.stocks_files.sort()
 
@@ -57,7 +57,7 @@ class stock_summary_data():
         number_of_stocks = 0
         stocks_passed = 0
         stocks_failed = 0
-        print ("----- Calculating ------")
+
         # Stock name, annual return (summed), variance
         for file_path in self.stocks_files:
             try:
@@ -79,7 +79,7 @@ class stock_summary_data():
         now = datetime.datetime.now()
         dt_string = now.strftime("%d_%m_%Y_%H_%M_%S")
 
-        file_write_csv = open("stock_summary_data_" + dt_string + ".csv", 'x')
+        file_write_csv = open("../data/summarized_data/stock_summary_data_" + dt_string + ".csv", 'x')
         file_write_csv.write("sector,stock_name,avg_yearly_return,variance_sum\n")
         print ("----- Writing ------")
         for stock_data in final_data:
@@ -88,6 +88,7 @@ class stock_summary_data():
             except:
                 print (stock_data)
         file_write_csv.close()
+
 if __name__ == "__main__":
 
     ssd = stock_summary_data()
