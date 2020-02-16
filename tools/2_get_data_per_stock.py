@@ -59,20 +59,21 @@ class get_data_per_stock():
             This next portion is commented out because it takes a while to run. We saved the results of that and 
             put it in data/data_to_avoid. Left it in case we needed to rerun
         """
-        # num_missing = []
-        # for stock_data in self.reformated_stock_symbols:
+        
+        # self.final_stock_symbols = []
+        # for stock_symbol in self.reformated_stock_symbols:
+        #     if self.check_if_stock_file_exists(stock_symbol):
+        #       continue
         #     try:
-        #         ticker = yf.Ticker(str(stock_data))
-        #         sector = ticker.info['sector'] 
+        #         ticker = yf.Ticker(stock_symbol)
+        #         sector = ticker.info['sector']
+        #         self.final_stock_symbols.append(stock_symbol)
         #     except:
         #         e = sys.exc_info()[0]
-        #         print (stock_data)
+        #         print (stock_symbol)
         #         print (e)
-        #         num_missing.append(stock_data)
-            
-        # print(num_missing)
-        # print(len(num_missing))
-    
+                
+          
     def check_if_stock_file_exists(self, cur_stock_symbol):
         for stock in self.stocks_files:
             stock_name = stock.split("/")[-1].split(".")[0].split("_")[0]
