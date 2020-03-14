@@ -24,7 +24,7 @@ class aggregate_stock_sector_data():
         combined_csv = pd.concat(combined_csv)
         now = datetime.datetime.now()
         dt_string = now.strftime("%d_%m_%Y_%H_%M_%S")
-        
+        print ("../data/aggregated_data/combined_" + dt_string + ".csv")
         combined_csv.to_csv( "../data/aggregated_data/combined_" + dt_string + ".csv", index=False, encoding='utf-8-sig')
 
     def run(self):
