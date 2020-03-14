@@ -4,6 +4,7 @@ import yfinance as yf
 import sys
 import os.path
 import glob 
+import traceback
 
 class get_data_per_stock():
     
@@ -85,16 +86,17 @@ class get_data_per_stock():
         
         for stock_symbol in self.final_stock_symbols:
             
-            if self.check_if_stock_file_exists(stock_symbol):
-                continue
+            # if self.check_if_stock_file_exists(stock_symbol):
+            #     continue
             
             try:
                 ticker = yf.Ticker(str(stock_symbol))
                 sector = ticker.info['sector'] 
-                history = ticker.history(start="2010-01-01", end="2020-01-01")
+                history = ticker.history(start="2010-01-01", end="2020-03-13")
                 history.to_csv("../data/dataset_with_sector/" + stock_symbol + "_" + sector.replace(" ", "-") + ".csv")
             except:
                 e = sys.exc_info()[0]
+                traceback.print_exc()
                 print (stock_symbol)
                 print (e)
     
