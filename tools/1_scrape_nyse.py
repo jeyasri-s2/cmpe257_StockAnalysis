@@ -21,7 +21,8 @@ class scrape_nyse():
                 trs = self.driver.find_elements(By.XPATH, '//tr')
                 trs = trs[1:]
                 for tr in trs:
-                    self.stock_symbols.append(str(tr.text).split(" ")[0])
+                    stock_name = " ".join(str(tr.text).split(" ")[1:])
+                    self.stock_symbols.append([str(tr.text).split(" ")[0], stock_name])
 
                 next_button = self.driver.find_element_by_xpath(".//a[@rel='next']")
                 next_button.click()
@@ -33,9 +34,9 @@ class scrape_nyse():
         now = datetime.datetime.now()
         dt_string = now.strftime("%d_%m_%Y_%H_%M_%S")
         file_write_csv = open("../data/scraped_stocks/scrape_nyse_" + dt_string + ".csv", 'w')
-        file_write_csv.write("stock_symbol\n")
+        file_write_csv.write("stock_symbol,stock_name\n")
         for stock_symbol in self.stock_symbols:
-            file_write_csv.write(stock_symbol + "\n")
+            file_write_csv.write(stock_symbol[0] + "," + stock_symbol[1] + "\n")
 
         file_write_csv.close()
     def stop(self):
