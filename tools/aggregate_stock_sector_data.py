@@ -5,7 +5,7 @@ import datetime
 class aggregate_stock_sector_data():
 
     def __init__(self):
-        self.stocks_files = glob.glob("../data/dataset_with_sector/*.csv")
+        self.stocks_files = glob.glob("../data/dataset_with_sector_clean/*.csv")
 
         self.stocks_files.sort()
     
