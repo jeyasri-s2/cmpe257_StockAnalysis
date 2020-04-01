@@ -92,9 +92,10 @@ class get_data_per_stock():
             try:
                 ticker = yf.Ticker(str(stock_symbol))
                 sector = ticker.info['sector'] 
-                history = ticker.history(start="2010-01-01", end="2020-03-13")
+                history = ticker.history(start="2010-01-01", end="2020-03-13", auto_adjust=False)
                 history.to_csv("../data/dataset_with_sector/" + stock_symbol + "_" + sector.replace(" ", "-") + ".csv")
             except:
+                
                 e = sys.exc_info()[0]
                 traceback.print_exc()
                 print (stock_symbol)
