@@ -1,11 +1,11 @@
 import glob 
 import pandas as pd
 import datetime
-
+import sys
 class aggregate_stock_sector_data():
 
     def __init__(self):
-        self.stocks_files = glob.glob("../data/dataset_with_sector_clean/*.csv")
+        self.stocks_files = glob.glob("../data/dataset_with_sector/*.csv")
 
         self.stocks_files.sort()
     
@@ -19,8 +19,10 @@ class aggregate_stock_sector_data():
             temp_pd = pd.read_csv(stock_file)
             temp_pd['stock_name'] = stock_name
             temp_pd['sector'] = sector
+            if 'Adj Close' in temp_pd.columns:
+                combined_csv.append(temp_pd)
             
-            combined_csv.append(temp_pd)
+        print (len(combined_csv))
         combined_csv = pd.concat(combined_csv)
         now = datetime.datetime.now()
         dt_string = now.strftime("%d_%m_%Y_%H_%M_%S")
