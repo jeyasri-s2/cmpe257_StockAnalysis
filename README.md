@@ -1,5 +1,4 @@
-# Cmpe257_StockAnalysis
-This repository will contain all notebooks created for Stock analysis Project
+# Project: Stock Market Prediction Using Stock and Stock News Data
 
 1. Identify the top 3 sector
 > From the historical stock market data, we have identified the largest sectors by volume of stocks
